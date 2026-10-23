@@ -1,7 +1,7 @@
 export const norm = s => String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-const stop = new Set('que cual cuales como tenemos tengo tiene hay el la los las un una unos unas de del en con por para al y o me mi nuestro nuestra nuestros nuestras inventario producto productos codigo existencia existencias precio precios cuanto cuantos cuesta cuestan quedan disponible disponibles busca buscar buscame dime muestra mostrar mejor proveedor proveedores barato barata comprar comparar unidad unidades divisas bolivares bs'.split(' '));
+const stop = new Set('que cual cuales como tenemos tengo tiene hay el la los las un una unos unas de del en con por para al y o me mi nuestro nuestra nuestros nuestras inventario producto productos codigo existencia existencias precio precios estan están cuantas cuanto cuantos cuesta cuestan quedan disponible disponibles busca buscar buscame dime muestra mostrar mejor proveedor proveedores barato barata comprar comparar unidad unidades divisas bolivares bs'.split(' '));
 export function search(products, query) {
- const q=norm(query), compact=q.replace(/[^a-z0-9]/g,'');
+ const q=norm(query);
  const exact=products.filter(p=>norm(p.codigo)===q.trim()||q.split(/[^a-z0-9_-]+/).includes(norm(p.codigo)));
  if(exact.length)return {total:exact.length,items:exact.slice(0,12),exact:true};
  const tokens=q.replace(/[^a-z0-9/.-]/g,' ').split(/\s+/).filter(t=>t&&!stop.has(t));
